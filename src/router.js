@@ -3,6 +3,7 @@ import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import Home from './components/Home';
 import ArtistMain from './components/artists/ArtistMain';
 import ArtistCreate from './components/artists/ArtistCreate';
+import ArtistDetails from './components/artists/ArtistDetails';
 
 const Routes = () => {
 	return (
@@ -10,7 +11,8 @@ const Routes = () => {
 			<Route path="/" component={Home}>
 				<IndexRoute component={ArtistMain} />
 				<Route path="artists/new" component={ArtistCreate} />
-				<Route path="artists/:id" component={ArtistCreate} />
+				<Route path="artists/:id" component={ArtistDetails} />
+				<Route path="artists/:id/edit" component={ArtistCreate} />
 			</Route>
 		</Router>
 	);

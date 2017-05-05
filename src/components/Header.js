@@ -13,14 +13,13 @@ class Header extends Component {
 	}
 
 	setLink() {
-		window.db.collection('artist')
+		window.db.collection('artists')
 			.aggregate({$sample: {size: 100}})
 			.toArray()
 			.then(artists => {
+				// console.log(artists);
 				//~~ (faster than Math.floor()) bitwise operator
 				const artist = artists[~~(Math.random() * artists.length)];
-
-				console.log(artist);
 
 				if(artist) {
 					this.setState({id: artist._id.toString()});

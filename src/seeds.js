@@ -25,6 +25,26 @@ db.open()
 
 	function createArtist() {
 		return {
-			name: faker.name.findName()
+			name: faker.name.findName(),
+			age: randomBetween(15, 55),
+			yearsActive: randomBetween(0, 20),
+			image: faker.image.avatar(),
+			genre: getGenre(),
+			website: faker.internet.url(),
+			netWorth: randomBetween(0, 5000000),
+			labelName: faker.company.companyName(),
+			retired: faker.random.boolean()
 		};
+	}
+
+	function getGenre() {
+		return randomEntry(GENRES);
+	}
+
+	function randomEntry(array) {
+		return array[~~(Math.random() * array.length)];
+	}
+
+	function randomBetween(min, max) {
+		return ~~(Math.random() * (max-min)) + min;
 	}
