@@ -14,7 +14,7 @@ class Header extends Component {
 									<Link>Random Artist</Link>
 								</li>
 								<li>
-									<Link>Create Artisti</Link>
+									<Link to={'/artists/new'}>Create Artist</Link>
 								</li>
 							</ul>
 						</div>
