@@ -1,0 +1,18 @@
+.range-slider {
+  margin: 65px 0 30px;
+}
+
+.range-slider label {
+  top: -37px;
+}
+
+.select {
+  font-size: 1rem;
+}
+
+select {
+  display: block !important;
+  margin-bottom: 10px;
+  height: 30px;
+  color: black;
+}

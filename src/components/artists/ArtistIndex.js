@@ -6,11 +6,18 @@ import * as actions from '../../actions';
 
 
 class ArtistIndex extends Component {
+	onChange(_id) {
+
+	}
+
 	renderList(artist) {
+		const {_id} = artist;
+		const classes = `collection-item avatar ${artist.retired && 'retired'}`;
 		return (
 			<li className={classes} key={_id}>
 				<div>
-					<input id={_id} type="checkbox"/>
+					<input id={_id} type="checkbox"
+						onChange={() => this.onChange(_id)}/>
 					<label htmlFor={_id} />
 				</div>
 				<img src={artist.image} className="circle" />
@@ -42,9 +49,26 @@ class ArtistIndex extends Component {
 		);
 	}
 
+	renderRetire() {
+		if(this.props.selection.length) {
+			return (
+				<div>
+					<button className="btn"
+					> Retire
+					</button>
+					<button className="btn"
+					> Unretire
+					</button>
+				</div>
+			);
+		}
+	}
+
 	render() {
+		console.log(this.props.artists);
 		return (
 			<div>
+				{this.renderRetire()}
 				<ul className="collection">
 					{this.props.artists.all.map(this.renderList.bind(this))}
 					{this.renderEmptyCollection()}

@@ -15,3 +15,16 @@ import {
 
 import FindArtist from '../../database/queries/FindArtist';
 
+export const findArtist = id => dispatch =>
+  FindArtistProxy(id)
+    .then(artist => {
+      dispatch({type: FIND_ARTIST, payload: artist})
+    });
+
+const FindArtistProxy = (...args) => {
+  const result = FindArtist(...args);
+  if(!result || !result.then) {
+    return new Promise(() => {});
+  }
+  return result;
+};
