@@ -10,6 +10,7 @@ const Routes = () => {
 			<Route path="/" component={Home}>
 				<IndexRoute component={ArtistMain} />
 				<Route path="artists/new" component={ArtistCreate} />
+				<Route path="artists/:id" component={ArtistCreate} />
 			</Route>
 		</Router>
 	);

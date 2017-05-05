@@ -7,6 +7,7 @@ import {Db, Server} from 'mongodb';
 import mongoose from 'mongoose';
 import reducers from './reducers';
 import Routes from './router';
+import './seeds';
 
 mongoose.Promise = Promise;
 
@@ -18,7 +19,7 @@ const App = () => {
 			<Routes/>
 		</Provider>
 	);
-};
+}; 
 
 const db = new Db('upstar_music', new Server('localhost', 27017));
 db.open()
