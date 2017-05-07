@@ -11,10 +11,20 @@ const TEXT_FIELDS = [
 class ArtistFilter extends Component {
 	componentWillMount() {
 		if(this.props.filters) {
-
+			this.props.searchArtists({
+				name: '',
+				...this.props.filters
+			});
 		} else {
-
+			this.props.searchArtists({
+				name: '', 
+				sort: 'name'
+			});
 		}
+	}
+
+	componentDidMount() {
+	
 	}
 
 	render() {

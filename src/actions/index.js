@@ -13,6 +13,7 @@ import {
   RESET_SELECTION
 } from './types';
 
+import SearchArtists from '../../database/queries/SearchArtists';
 import FindArtist from '../../database/queries/FindArtist';
 
 export const findArtist = id => dispatch =>
@@ -21,6 +22,13 @@ export const findArtist = id => dispatch =>
       dispatch({type: FIND_ARTIST, payload: artist})
     });
 
+export const searchArtists = (...criteria) => dispatch =>
+  SearchArtistsProxy(...criteria)
+    .then((result = []) => 
+      dispatch({type: SEARCH_ARTISTS, payload: result})
+    );
+
+
 const FindArtistProxy = (...args) => {
   const result = FindArtist(...args);
   if(!result || !result.then) {
@@ -28,3 +36,18 @@ const FindArtistProxy = (...args) => {
   }
   return result;
 };
+
+const SearchArtistsProxy = (criteria, offset, limit) => {
+  const result = SearchArtists(_.omit(criteria, 'sore'), criteria.sort, offset, limit);
+  if(!result || !result.then) {
+    return new Promise(() => {});
+  }
+return result;
+};
+// const SearchArtistsProxy = (criteria, offset, limit) => {
+//   const result = SearchArtists(_.omit(criteria, 'sort'), criteria.sort, offset, limit);
+//   if (!result || !result.then) {
+//     return new Promise(() => {});
+//   }
+//   return result;
+// };

@@ -29,7 +29,6 @@ db.open()
 			mongoose.connection
 				.once('open', () => {
 					ReactDOM.render(<App/>, document.getElementById('root'), () => {
-						console.log('Render success');
 					});
 				})
 				.on('error', (err) => {

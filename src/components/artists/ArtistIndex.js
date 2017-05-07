@@ -65,7 +65,7 @@ class ArtistIndex extends Component {
 	}
 
 	render() {
-		console.log(this.props.artists);
+		// console.log(this.props.artists);
 		return (
 			<div>
 				{this.renderRetire()}
