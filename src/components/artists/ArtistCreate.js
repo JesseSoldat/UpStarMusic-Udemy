@@ -4,9 +4,16 @@ import {reduxForm, Field} from 'redux-form';
 import * as actions from '../../actions';
 
 class ArtistCreate extends Component {
+
+	onSubmit(formProps) {
+		this.props.createArtist(formProps);
+	}
+
 	render() {
+		const {handleSubmit} = this.props;
+
 		return (
-			<form>
+			<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 				<div className="input-field">
 					 <Field name="name" component="input" placeholder="Name" />
 				</div>
