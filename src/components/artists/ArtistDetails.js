@@ -19,7 +19,7 @@ class ArtistDetails extends Component {
 			<div>
 				<div className="spacer">
 					<Link to="/">Back</Link>
-					<Link to={`/artist/${_id}/edit`}>Edit</Link>
+					<Link to={`/artists/${_id}/edit`}>Edit</Link>
 					<a onClick={this.onDeleteClick.bind(this)}>Delete</a>
 				</div>
 				<ul className="collection artist-detail">

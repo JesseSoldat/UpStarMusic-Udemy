@@ -16,6 +16,7 @@ import {
 import SearchArtists from '../../database/queries/SearchArtists';
 import FindArtist from '../../database/queries/FindArtist';
 import CreateArtist from '../../database/queries/CreateArtist';
+import EditArtist from '../../database/queries/EditArtist';
 
 export const searchArtists = (...criteria) => dispatch =>
   SearchArtistsProxy(...criteria)
@@ -39,8 +40,15 @@ export const createArtist = props => dispatch =>
       //dispatch({type: CREATE_ERROR, payload: error});
     });
 
-
-
+export const editArtist = (id, props) => dispatch =>
+  EditArtistProxy(id, props)
+    .then(() => {
+      hashHistory.push(`artists/${id}`)
+    })
+    .catch(error => {
+      console.log(error);
+      //dispatch({type: CREATE_ERROR, payload: error});
+    });
 
 const FindArtistProxy = (...args) => {
   const result = FindArtist(...args);
@@ -58,7 +66,6 @@ const SearchArtistsProxy = (criteria, offset, limit) => {
 return result;
 };
 
-
 const CreateArtistProxy = (...args) => {
   console.log(...args);
   const result = CreateArtist(...args)
@@ -67,3 +74,12 @@ const CreateArtistProxy = (...args) => {
   }
   return result;
 };
+
+const EditArtistProxy = (...args) => {
+  const result = EditArtist(...args);
+  if(!result || !result.then) {
+    return new Promise(() => {});
+  }
+  return result;
+};
+

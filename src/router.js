@@ -4,6 +4,7 @@ import Home from './components/Home';
 import ArtistMain from './components/artists/ArtistMain';
 import ArtistCreate from './components/artists/ArtistCreate';
 import ArtistDetails from './components/artists/ArtistDetails';
+import ArtistEdit from './components/artists/ArtistEdit';
 
 const Routes = () => {
 	return (
@@ -12,7 +13,7 @@ const Routes = () => {
 				<IndexRoute component={ArtistMain} />
 				<Route path="artists/new" component={ArtistCreate} />
 				<Route path="artists/:id" component={ArtistDetails} />
-				<Route path="artists/:id/edit" component={ArtistCreate} />
+				<Route path="artists/:id/edit" component={ArtistEdit} />
 			</Route>
 		</Router>
 	);
