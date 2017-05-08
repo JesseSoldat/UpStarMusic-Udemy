@@ -13,10 +13,24 @@ import {
   RESET_SELECTION
 } from './types';
 
+import GetAgeRange from '../../database/queries/GetAgeRange';
+import GetYearsActiveRange from '../../database/queries/GetYearsActiveRange';
 import SearchArtists from '../../database/queries/SearchArtists';
 import FindArtist from '../../database/queries/FindArtist';
 import CreateArtist from '../../database/queries/CreateArtist';
 import EditArtist from '../../database/queries/EditArtist';
+
+export const setAgeRange = () => dispatch =>
+  GetAgeRangeProxy()
+    .then(result => {
+      dispatch({type: SET_AGE_RANGE, payload: result})
+    });
+
+export const setYearsActiveRange = () => dispatch =>
+  GetYearsActiveRangeProxy()
+    .then(result => {
+      dispatch({type: SET_YEARS_ACTIVE_RANGE, payload: result })
+    });
 
 export const searchArtists = (...criteria) => dispatch =>
   SearchArtistsProxy(...criteria)
@@ -37,7 +51,7 @@ export const createArtist = props => dispatch =>
     })
     .catch(error => {
       console.log(error);
-      //dispatch({type: CREATE_ERROR, payload: error});
+      dispatch({type: CREATE_ERROR, payload: error});
     });
 
 export const editArtist = (id, props) => dispatch =>
@@ -47,8 +61,24 @@ export const editArtist = (id, props) => dispatch =>
     })
     .catch(error => {
       console.log(error);
-      //dispatch({type: CREATE_ERROR, payload: error});
+      dispatch({type: CREATE_ERROR, payload: error});
     });
+
+const GetAgeRangeProxy = (...args) => {
+  const result = GetAgeRange(...args);
+    if(!result || !result.then) {
+      return new Promise(() => {});
+    }
+    return result;
+};
+
+const GetYearsActiveRangeProxy = (...args) => {
+  const result = GetYearsActiveRange(...args);
+  if(!result || !result.then) {
+    return new Promise(() => {});
+  }
+  return result;
+};
 
 const FindArtistProxy = (...args) => {
   const result = FindArtist(...args);

@@ -24,17 +24,40 @@ class ArtistFilter extends Component {
 	}
 
 	componentDidMount() {
-	
+		this.props.setAgeRange();
+    this.props.setYearsActiveRange();
 	}
 
+	handleSubmit(formProps) {
+		this.props.searchArtists({
+			name: '',
+			...formProps
+		});
+	}
+
+	renderInputs() {
+		return TEXT_FIELDS.map(({label, prop}) =>
+			<div className="input-field" key={prop}>
+				<Field placeholder={label} id={prop}
+					name={prop} component="input" type="text"
+				/>
+			</div>
+		);
+	}
+	
+
 	render() {
+		const {handleSubmit} = this.props;
+
 		return (
 			<div className="card blue-grey darken-1 row">
 				<div className="card-content white-text">
-					<form>
+					<form onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
 						<div className="center-align card-title">
 							Search
 						</div>
+
+						{this.renderInputs()}
 
 						<div className="input-field">
 							<Field id="age" label="Age" 
