@@ -15,7 +15,7 @@ module.exports = () => {
 
 		return Promise.all([minQuery, maxQuery])
 			.then(res => {
-				console.log('Get Age Range Query', res);
+				// console.log('Get Age Range Query', res);
 				return { min: res[0], max: res[1] };
 			});
 };

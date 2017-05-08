@@ -16,8 +16,8 @@ class Range extends Component {
 				<label>{this.props.label}</label>
 				<Slider
 					onChange={this.onChange.bind(this)}
-					minValue={this.props.range.min}
-					maxValue={this.props.range.max}
+					minValue={this.props.range.min || 0}
+					maxValue={this.props.range.max || 100}
 					value={value || this.props.range}
 				/>
 			</div>

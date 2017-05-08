@@ -97,7 +97,6 @@ return result;
 };
 
 const CreateArtistProxy = (...args) => {
-  console.log(...args);
   const result = CreateArtist(...args)
   if(!result || !result.then) {
     return new Promise(() => {})

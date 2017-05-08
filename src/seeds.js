@@ -33,8 +33,31 @@ db.open()
 			website: faker.internet.url(),
 			netWorth: randomBetween(0, 5000000),
 			labelName: faker.company.companyName(),
-			retired: faker.random.boolean()
+			retired: faker.random.boolean(),
+			albums: getAlbums()
 		};
+	}
+
+	function getAlbums() {
+		return _.times(randomBetween(0,5), () => {
+			const copiesSold = randomBetween(0, 10000000);
+
+			return {
+				title: _.capitalize(faker.random.words()),
+				date: faker.date.past(),
+				copiesSold,
+				numberTracks: randomBetween(1, 20),
+				image: getAlbumImage(),
+				revenue: copiesSold * 12.99
+			};
+		});
+	}
+
+	function getAlbumImage() {
+	  const types = _.keys(faker.image);
+	  const method = randomEntry(types);
+
+	  return faker.image[method]();
 	}
 
 	function getGenre() {
