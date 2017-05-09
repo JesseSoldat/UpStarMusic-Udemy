@@ -8,7 +8,12 @@ import Paginator from './Paginator';
 
 class ArtistIndex extends Component {
 	onChange(_id) {
+		if(_.contains(this.props.selection, _id)) {
+			this.props.deselectArtist(_id);
 
+		} else {
+			this.props.selectArtist(_id);
+		}
 	}
 
 	renderList(artist) {
@@ -32,7 +37,7 @@ class ArtistIndex extends Component {
 						{artist.albums ? artist.albums.length : 0} albums released
 					</p>
 				</div>
-				<Link to={`artist/${artist._id}`} className="secondary-content">
+				<Link to={`artists/${artist._id}`} className="secondary-content">
 					<i className="material-icons">play_arrow</i>
 				</Link>
 			</li>
@@ -61,9 +66,11 @@ class ArtistIndex extends Component {
 			return (
 				<div>
 					<button className="btn"
+						onClick={() => this.props.setRetired(this.props.selection)}
 					> Retire
 					</button>
 					<button className="btn"
+						onClick={() => this.props.setNotRetired(this.props.selection)}
 					> Unretire
 					</button>
 				</div>
@@ -72,7 +79,6 @@ class ArtistIndex extends Component {
 	}
 
 	render() {
-		// console.log(this.props.artists);
 		return (
 			<div>
 				{this.renderRetire()}

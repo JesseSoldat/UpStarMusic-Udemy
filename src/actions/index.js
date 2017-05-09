@@ -19,6 +19,36 @@ import SearchArtists from '../../database/queries/SearchArtists';
 import FindArtist from '../../database/queries/FindArtist';
 import CreateArtist from '../../database/queries/CreateArtist';
 import EditArtist from '../../database/queries/EditArtist';
+import SetRetired from '../../database/queries/SetRetired';
+import SetNotRetired from '../../database/queries/SetNotRetired';
+
+export const resetArtist = () => {
+  return { type: RESET_ARTIST };
+};
+
+export const clearError = () => {
+  return { type: CLEAR_ERROR };
+}
+
+export const selectArtist = id => {
+  return {type: SELECT_ARTIST, payload: id };
+};
+
+export const deselectArtist = id => {
+  return { type: DESELECT_ARTIST, payload: id };
+};
+
+export const setRetired = ids => (dispatch, getState) => {
+  SetRetiredProxy(ids.map(id => id.toString()))
+    .then(() => dispatch({type: RESET_SELECTION }))
+    .then(() => refreshSearch(dispatch, getState));
+}
+
+export const setNotRetired = ids => (dispatch, getState) => {
+  SetNotRetiredProxy(ids.map(id => id.toString()))
+    .then(() => dispatch({type: RESET_SELECTION }))
+    .then(() => refreshSearch(dispatch, getState));
+}
 
 export const setAgeRange = () => dispatch =>
   GetAgeRangeProxy()
@@ -111,4 +141,35 @@ const EditArtistProxy = (...args) => {
   }
   return result;
 };
+
+const SetRetiredProxy = (_ids) => {
+  const result = SetRetired(_ids);
+  console.log(result);
+  if(!result || !result.then) {
+    return new Promise(() => {});
+  }
+  return result;
+};
+
+const SetNotRetiredProxy = (_ids) => {
+  const result = SetNotRetired(_ids);
+  if(!result || !result.then) {
+    return new Promise(() => {});
+  }
+  return result;
+};
+
+const refreshSearch = (dispatch, getState) => {
+  const { artists: { offset, limit } } = getState();
+  const criteria = getState().form.filters.values;
+
+  dispatch(searchArtists({name: '', ...criteria }, offset, limit));
+}
+
+// const refreshSearch = (dispatch, getState) => {
+//   const { artists: { offset, limit } } = getState();
+//   const criteria = getState().form.filters.values;
+
+//   dispatch(searchArtists({ name: '', ...criteria }, offset, limit));
+// };
 
