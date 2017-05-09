@@ -3,8 +3,8 @@ import faker from 'faker';
 import {Db, Server} from 'mongodb';
 import {GENRES} from './constants';
 
-const MINIMUM_ARTIST = 2;
-const ARTIST_TO_ADD = 15;
+const MINIMUM_ARTIST = 50;
+const ARTIST_TO_ADD = 500;
 
 let artistsCollection;
 const db = new Db('upstar_music', new Server('localhost', 27017));

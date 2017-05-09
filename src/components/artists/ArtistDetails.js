@@ -9,7 +9,7 @@ class ArtistDetails extends Component {
 	}
 
 	onDeleteClick() {
-
+		this.props.deleteArtist(this.props.params.id);
 	}
 
 	render() {

@@ -21,6 +21,8 @@ import CreateArtist from '../../database/queries/CreateArtist';
 import EditArtist from '../../database/queries/EditArtist';
 import SetRetired from '../../database/queries/SetRetired';
 import SetNotRetired from '../../database/queries/SetNotRetired';
+import DeleteArtist from '../../database/queries/DeleteArtist';
+
 
 export const resetArtist = () => {
   return { type: RESET_ARTIST };
@@ -94,6 +96,14 @@ export const editArtist = (id, props) => dispatch =>
       dispatch({type: CREATE_ERROR, payload: error});
     });
 
+export const deleteArtist = (id) => dispatch =>
+  DeleteArtistProxy(id)
+    .then(() => hashHistory.push('/'))
+    .catch(err => {
+      console.log(err);
+      dispatch({type: CREATE_ERROR, payload: error});
+    });
+
 const GetAgeRangeProxy = (...args) => {
   const result = GetAgeRange(...args);
     if(!result || !result.then) {
@@ -136,6 +146,14 @@ const CreateArtistProxy = (...args) => {
 
 const EditArtistProxy = (...args) => {
   const result = EditArtist(...args);
+  if(!result || !result.then) {
+    return new Promise(() => {});
+  }
+  return result;
+};
+
+const DeleteArtistProxy = (...args) => {
+  const result = DeleteArtist(...args);
   if(!result || !result.then) {
     return new Promise(() => {});
   }
