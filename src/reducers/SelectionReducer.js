@@ -11,7 +11,8 @@ export default (state= [], action) => {
 		case SELECT_ARTIST:
 			return [...state, action.payload];
 		case DESELECT_ARTIST:
-			return state;
+		//return whatever is not in the payload that is in state
+			return _.without(state, action.payload);
 		case RESET_SELECTION:
 			return [];
 		default:

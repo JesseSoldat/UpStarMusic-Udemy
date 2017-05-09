@@ -23,6 +23,7 @@ class ArtistIndex extends Component {
 			<li className={classes} key={_id}>
 				<div>
 					<input id={_id} type="checkbox"
+						checked={_.contains(this.props.selection, _id)}
 						onChange={() => this.onChange(_id)}/>
 					<label htmlFor={_id} />
 				</div>

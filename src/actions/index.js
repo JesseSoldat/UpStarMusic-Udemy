@@ -144,7 +144,6 @@ const EditArtistProxy = (...args) => {
 
 const SetRetiredProxy = (_ids) => {
   const result = SetRetired(_ids);
-  console.log(result);
   if(!result || !result.then) {
     return new Promise(() => {});
   }
@@ -166,10 +165,5 @@ const refreshSearch = (dispatch, getState) => {
   dispatch(searchArtists({name: '', ...criteria }, offset, limit));
 }
 
-// const refreshSearch = (dispatch, getState) => {
-//   const { artists: { offset, limit } } = getState();
-//   const criteria = getState().form.filters.values;
 
-//   dispatch(searchArtists({ name: '', ...criteria }, offset, limit));
-// };
 
