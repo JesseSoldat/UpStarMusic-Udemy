@@ -3,6 +3,7 @@ import React, {Component} from 'React';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
+import Paginator from './Paginator';
 
 
 class ArtistIndex extends Component {
@@ -36,6 +37,12 @@ class ArtistIndex extends Component {
 				</Link>
 			</li>
 		);
+	}
+
+	renderPaginator() {
+		if(this.props.artists.all.length) {
+			return <Paginator />;
+		}
 	}
 
 	renderEmptyCollection() {
@@ -73,6 +80,7 @@ class ArtistIndex extends Component {
 					{this.props.artists.all.map(this.renderList.bind(this))}
 					{this.renderEmptyCollection()}
 				</ul>
+				{this.renderPaginator()}
 			</div>
 		);
 	}

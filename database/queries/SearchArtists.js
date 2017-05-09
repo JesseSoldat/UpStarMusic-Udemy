@@ -43,7 +43,7 @@
 
 
 
-module.exports = (criteria, sortProperty, offset = 0, limit = 20) => {
+module.exports = (criteria, sortProperty, offset = 0, limit = 10) => {
   const all = buildQuery(criteria, sortProperty)
     .skip(offset)
     .limit(limit);
